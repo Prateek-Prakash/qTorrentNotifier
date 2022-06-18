@@ -20,16 +20,24 @@ async def register_token(token: str):
         token_file.write(token)
     return PlainTextResponse('Done')
 
+@app.get('/api/v1/deregisterToken')
+async def deregister_token():
+    with open('Token.txt', 'w') as token_file:
+        token_file.write('')
+    return PlainTextResponse('Done')
+
 @app.get('/api/v1/sendMessage')
 async def send_message(title: str, body: str):
     with open('Token.txt', 'r') as token_file:
-        registration_token = token_file.readline()
-        message = messaging.Message(
-            notification = messaging.Notification(
-                title = title,
-                body = body,
-            ),
-            token = registration_token
-        )
-        messaging.send(message)
+        token = token_file.readline()
+        if len(token) > 0:
+            registration_token = token
+            message = messaging.Message(
+                notification = messaging.Notification(
+                    title = title,
+                    body = body,
+                ),
+                token = registration_token
+            )
+            messaging.send(message)
     return PlainTextResponse('Done')
