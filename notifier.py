@@ -9,4 +9,4 @@ def notify(torrent_name: str):
     requests.get(f'http://127.0.0.1:8081/api/v1/sendMessage', params=params)
 
 if __name__ == '__main__':
-    notify(str(sys.argv[1]), str(sys.argv[2]))
+    notify(str(sys.argv[1]))
