@@ -1,6 +1,4 @@
-from lib2to3.pgen2 import token
 import firebase_admin
-import os.path
 import starlette.responses
 
 from fastapi import FastAPI
