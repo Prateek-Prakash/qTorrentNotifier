@@ -1,6 +1,5 @@
 import firebase_admin
 import starlette.responses
-import uvicorn
 
 from fastapi import FastAPI
 from fastapi.responses import PlainTextResponse
@@ -10,7 +9,6 @@ from firebase_admin import messaging
 app = FastAPI(title='qTorrentNotifier')
 cred = credentials.Certificate("ServiceAccountKey.json")
 firebase_admin.initialize_app(cred)
-uvicorn.run(app, host='0.0.0.0', port=8085)
 
 @app.get('/', include_in_schema=False)
 async def redirect_root():
